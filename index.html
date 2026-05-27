@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | LeadFlow AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: radial-gradient(circle at top right, #1e293b, #020617);
+        }
+        .login-card { width: 100%; max-width: 400px; padding: 2.5rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+        input {
+            width: 100%; padding: 0.8rem; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color); border-radius: 8px; color: white; outline: none;
+        }
+        input:focus { border-color: var(--accent-primary); }
+    </style>
+</head>
+<body>
+    <div class="glass-card login-card">
+        <div class="logo" style="text-align: center;">LeadFlow AI</div>
+        <h2 style="text-align: center; margin-bottom: 2rem; font-weight: 500;">Welcome Back</h2>
+        <form action="dashboard.html">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="name@company.com" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%;">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>
