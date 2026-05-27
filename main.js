@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = parseFloat(counter.getAttribute('data-target'));
             const currentText = counter.innerText.replace('$', '').replace(',', '');
             const count = parseFloat(currentText) || 0;
-            const increment = target / 50;
+            const increment = target / 30; // Faster animation
 
             if (count < target) {
                 const newValue = Math.min(target, count + increment);
                 counter.innerText = (counter.innerText.includes('$') ? '$' : '') + 
-                    (target % 1 === 0 ? Math.floor(newValue).toLocaleString() : newValue.toFixed(2));
+                    (target % 1 === 0 ? Math.round(newValue).toLocaleString() : newValue.toFixed(2));
                 setTimeout(animateCounters, 20);
             }
         });
