@@ -3,42 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | LeadFlow AI</title>
+    <title>Sign In | VilPower Nexus</title>
+    <!-- Google Fonts -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #0f1223 0%, #05060b 100%);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
-        .login-card { width: 90%; max-width: 420px; padding: 3rem; }
-        .input-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
-        input {
-            width: 100%; padding: 0.85rem; background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color); border-radius: 12px; color: white; outline: none;
-            transition: border-color 0.3s ease;
+
+        /* Decorative glowing orbs */
+        .glow-orb-1 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+            pointer-events: none;
         }
-        input:focus { border-color: var(--accent-primary); background: rgba(255, 255, 255, 0.05); }
+        .glow-orb-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            pointer-events: none;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 2.75rem 2.5rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 10;
+            transition: var(--transition-normal);
+        }
+
+        .login-card:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 25px 60px rgba(99, 102, 241, 0.05);
+        }
+
+        .login-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .login-logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .login-logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .input-field-wrapper {
+            position: relative;
+        }
+
+        .input-field-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4b526d;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+        }
+
+        .input-field-wrapper input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            background-color: #141724;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition-fast);
+        }
+
+        .input-field-wrapper input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+            background-color: #171b2d;
+        }
+
+        .input-field-wrapper input:focus + i {
+            color: var(--accent-primary);
+        }
+
+        .login-error-banner {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            font-size: 0.825rem;
+            margin-bottom: 1.5rem;
+            display: none;
+            line-height: 1.4;
+        }
+
+        .login-error-banner i {
+            margin-right: 0.35rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:disabled {
+            background-color: #31375c;
+            color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .demo-credentials {
+            margin-top: 1.75rem;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.015);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.775rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        .demo-credentials strong {
+            color: var(--text-main);
+        }
     </style>
 </head>
 <body>
-    <div class="glass-card login-card">
-        <div class="logo" style="text-align: center;">LeadFlow AI</div>
-        <h2 style="text-align: center; margin-bottom: 2rem; font-weight: 500;">Welcome Back</h2>
-        <form action="dashboard.html">
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="name@company.com" required>
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <div class="login-card">
+        <div class="login-logo">
+            <div class="login-logo-icon">
+                <i class="fa-solid fa-chart-line"></i>
             </div>
+            <div class="login-logo-text">VilPower Nexus</div>
+        </div>
+
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Enter details to access your marketing dashboard</p>
+        </div>
+
+        <div id="loginErrorBanner" class="login-error-banner"></div>
+
+        <form id="loginForm">
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" placeholder="••••••••" required>
+                <label for="email">Email Address</label>
+                <div class="input-field-wrapper">
+                    <input type="email" id="email" placeholder="name@company.com" required autocomplete="username">
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
             </div>
-            <button type="submit" class="btn-primary" style="width: 100%;">Sign In</button>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-field-wrapper">
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <span>Sign In</span>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
         </form>
+
+        <div class="demo-credentials">
+            <i class="fa-solid fa-circle-info"></i> Demo access: <strong>admin@vilpowernexus.com</strong> / <strong>admin123</strong>
+        </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -3,51 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | LeadFlow AI</title>
+    <title>Dashboard | VilPower Nexus</title>
+    <!-- Google Fonts: Inter -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Mobile Navigation Header -->
+    <div class="mobile-header">
+        <a href="#dashboard" class="logo-wrapper">
+            <div class="logo-icon">
+                <i class="fa-solid fa-chart-line text-white"></i>
+            </div>
+            <span class="logo-text">VilPower Nexus</span>
+        </a>
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
     <div class="app-container">
+        <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
-            <div class="logo">LeadFlow AI</div>
-            <ul class="nav-links">
-                <li class="nav-item"><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
-                <li class="nav-item"><a href="analytics.html" class="nav-link">Analytics</a></li>
-                <li class="nav-item"><a href="leads.html" class="nav-link">Lead CRM</a></li>
-                <li class="nav-item"><a href="insights.html" class="nav-link">AI Insights</a></li>
-                <li class="nav-item"><a href="reports.html" class="nav-link">Reports</a></li>
-                <li class="nav-item"><a href="settings.html" class="nav-link">Settings</a></li>
-            </ul>
-        </aside>
+            <div class="sidebar-header">
+                <a href="#dashboard" class="logo-wrapper">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-chart-line" style="color: white;"></i>
+                    </div>
+                    <span class="logo-text">VilPower Nexus</span>
+                </a>
+                <button class="sidebar-collapse-btn" aria-label="Collapse Sidebar">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            </div>
 
-        <main class="main-content">
-            <header style="margin-bottom: 2.5rem;">
-                <h1>Intelligence Overview</h1>
-                <p style="color: var(--text-muted);">Real-time marketing & admissions performance.</p>
-            </header>
-
-            <div class="stats-grid">
-                <div class="glass-card">
-                    <div class="ai-glow"></div>
-                    <p style="color: var(--text-muted);">Total Ad Spend</p>
-                    <h2 class="counter" data-target="14500">$0</h2>
-                    <span style="color: #10b981; font-size: 0.8rem;">↑ 12% vs last month</span>
-                </div>
-                <div class="glass-card">
-                    <p style="color: var(--text-muted);">Leads Generated</p>
-                    <h2 class="counter" data-target="842">0</h2>
-                    <span style="color: #10b981; font-size: 0.8rem;">↑ 8.4% conversion</span>
-                </div>
-                <div class="glass-card">
-                    <p style="color: var(--text-muted);">Cost Per Lead</p>
-                    <h2 class="counter" data-target="17.20">$0</h2>
-                    <span style="color: #ef4444; font-size: 0.8rem;">↓ 2.1% efficiency</span>
+            <!-- Sidebar Search -->
+            <div class="search-wrapper">
+                <div class="search-input-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search for...">
                 </div>
             </div>
-            
-            <!-- More dashboard sections will go here -->
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Main Menu</div>
+                <ul class="nav-list">
+                    <li class="nav-item open">
+                        <a href="#" class="nav-link nav-link-dropdown active">
+                            <span class="nav-link-content">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Dashboard</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down chevron-icon"></i>
+                        </a>
+                        <ul class="nav-sub-list">
+                            <li><a href="#dashboard" class="nav-sub-link active">Reports</a></li>
+                            <li><a href="#analytics" class="nav-sub-link">Analytics</a></li>
+                            <li><a href="#leads" class="nav-sub-link">Lead CRM</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#social-reports" class="nav-link">
+                            <span class="nav-link-content">
+                                <i class="fa-solid fa-share-nodes"></i>
+                                <span>Social Reports</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#insights" class="nav-link">
+                            <span class="nav-link-content">
+                                <i class="fa-solid fa-brain"></i>
+                                <span>AI Insights</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">Customization</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link">
+                            <span class="nav-link-content">
+                                <i class="fa-solid fa-sliders"></i>
+                                <span>Settings</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-link-content">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Sidebar Profile & CTA -->
+            <div class="sidebar-footer">
+                <a href="#settings" class="sidebar-user">
+                    <div class="user-avatar-wrapper">
+                        <img src="images/john_carter.png" alt="John Carter" class="user-avatar" onerror="this.src='https://ui-avatars.com/api/?name=John+Carter&background=6366f1&color=fff'">
+                        <div class="user-info">
+                            <span class="user-name">John Carter</span>
+                            <span class="user-role">Account settings</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="sidebar-cta-btn create-report-btn-el">
+                    <span>Get template</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Viewport -->
+        <main class="main-content">
+            <!-- Dynamic Top Nav Bar -->
+            <header class="top-nav">
+                <div class="page-title-group">
+                    <h1 id="mainPageTitle">Welcome back, John</h1>
+                    <p id="mainPageDesc">Measure your advertising ROI and report website traffic.</p>
+                </div>
+                <div class="action-buttons">
+                    <!-- Client Selector (14 accounts support) -->
+                    <div class="client-selector-container">
+                        <i class="fa-solid fa-briefcase" style="color: var(--text-muted); font-size: 0.95rem; margin-right: 0.25rem;"></i>
+                        <select id="clientSelector" class="client-select" aria-label="Select Client Account">
+                            <option value="client-0">VilPower Ltd</option>
+                            <option value="client-1">Nexus Technologies</option>
+                            <option value="client-2">Zenith Retail</option>
+                            <option value="client-3">Apex Learning</option>
+                            <option value="client-4">Acuity Brands</option>
+                            <option value="client-5">BlueWave Energy</option>
+                            <option value="client-6">Quantum Finance</option>
+                            <option value="client-7">Summit Healthcare</option>
+                            <option value="client-8">Vanguard Logistics</option>
+                            <option value="client-9">Starlight Media</option>
+                            <option value="client-10">Titan Construct</option>
+                            <option value="client-11">GreenGrowth Agri</option>
+                            <option value="client-12">Pinnacle Consult</option>
+                            <option value="client-13">Horizon Hotels</option>
+                        </select>
+                    </div>
+                    <button class="btn-secondary export-btn-el">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Export data</span>
+                    </button>
+                    <button class="btn-solid create-report-btn-el">
+                        <span>Create report</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: REPORTS / DEFAULT DASHBOARD -->
+            <section id="dashboard" class="tab-view active-view">
+                <!-- Statistics Row Refocused on FB, IG, YT and Ads -->
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-brands fa-facebook"></i> Facebook Reach</span>
+                            <button class="stat-card-options" aria-label="Options"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="dashValPageviews">50.8K</span>
+                            <span class="stat-badge positive" id="dashBadgePageviews">28.4% ↗</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-brands fa-instagram"></i> Instagram Engagement</span>
+                            <button class="stat-card-options" aria-label="Options"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="dashValUsers">23.6K</span>
+                            <span class="stat-badge negative" id="dashBadgeUsers">12.6% ↘</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-brands fa-youtube"></i> YouTube Subscribers</span>
+                            <button class="stat-card-options" aria-label="Options"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="dashValSignups">756</span>
+                            <span class="stat-badge positive" id="dashBadgeSignups">3.1% ↗</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-solid fa-bullhorn"></i> Ad Spend & ROI</span>
+                            <button class="stat-card-options" aria-label="Options"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="dashValSubs">2.3K</span>
+                            <span class="stat-badge positive" id="dashBadgeSubs">11.3% ↗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Graphs Section -->
+                <div class="charts-grid">
+                    <!-- Left: Total Revenue Chart -->
+                    <div class="glass-card">
+                        <div class="chart-card-header">
+                            <div class="chart-card-title-group">
+                                <span class="chart-card-title">Total revenue</span>
+                                <div class="chart-card-value-group">
+                                    <span class="chart-card-value" id="chartValRevenue">$240.8K</span>
+                                    <span class="stat-badge positive" id="chartBadgeRevenue">24.6% ↗</span>
+                                </div>
+                            </div>
+                            <div class="chart-header-actions">
+                                <div class="chart-legend">
+                                    <span class="legend-item"><span class="legend-color purple"></span> Revenue</span>
+                                    <span class="legend-item"><span class="legend-color cyan"></span> Expenses</span>
+                                </div>
+                                <select class="chart-dropdown-select" aria-label="Select Date Range">
+                                    <option>Jan 2026 - Dec 2026</option>
+                                    <option>Last 6 Months</option>
+                                    <option>Last 30 Days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper-el revenue-chart-height">
+                            <canvas id="revenueChartCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right: Stacked Profit and Sessions -->
+                    <div class="right-charts-stack">
+                        <!-- Top: Total Profit -->
+                        <div class="glass-card right-chart-card">
+                            <div>
+                                <div class="chart-card-header" style="margin-bottom: 0.75rem;">
+                                    <div class="chart-card-title-group">
+                                        <span class="chart-card-title">Total profit</span>
+                                        <div class="chart-card-value-group">
+                                            <span class="chart-card-value" id="chartValProfit">$144.6K</span>
+                                            <span class="stat-badge positive" id="chartBadgeProfit">28.5% ↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper-el side-chart-height">
+                                    <canvas id="profitChartCanvas"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card-footer">
+                                <span style="color: var(--text-muted);">Last 12 months</span>
+                                <a href="#analytics" class="card-link">View report</a>
+                            </div>
+                        </div>
+
+                        <!-- Bottom: Total Sessions -->
+                        <div class="glass-card right-chart-card">
+                            <div>
+                                <div class="chart-card-header" style="margin-bottom: 0.75rem;">
+                                    <div class="chart-card-title-group">
+                                        <span class="chart-card-title">Total sessions</span>
+                                        <div class="chart-card-value-group">
+                                            <span class="chart-card-value" id="chartValSessions">400</span>
+                                            <span class="stat-badge positive" id="chartBadgeSessions">16.8% ↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper-el side-chart-height">
+                                    <canvas id="sessionsChartCanvas"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card-footer">
+                                <span class="live-indicator">
+                                    <span class="pulse-dot"></span> Live 10k visitors
+                                </span>
+                                <a href="#analytics" class="card-link">View report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Overview Table -->
+                <div class="reports-overview-section glass-card">
+                    <div class="table-header-row">
+                        <span class="table-title">Reports overview</span>
+                        <select class="chart-dropdown-select" aria-label="Filter by Date">
+                            <option>Select date</option>
+                            <option>Today</option>
+                            <option>Yesterday</option>
+                            <option>This Week</option>
+                        </select>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="dashboardReportsTable">
+                            <thead>
+                                <tr>
+                                    <th>Campaign</th>
+                                    <th>Source</th>
+                                    <th>Pageviews</th>
+                                    <th>Conversions</th>
+                                    <th>Bounce Rate</th>
+                                    <th>ROI</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Populated Dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: ANALYTICS -->
+            <section id="analytics" class="tab-view">
+                <!-- Summary Metrics -->
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-solid fa-chart-pie"></i> Average Conversion Rate</span>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="analValConv">4.82%</span>
+                            <span class="stat-badge positive" id="analBadgeConv">0.4% ↗</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-solid fa-arrow-rotate-left"></i> Average Bounce Rate</span>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="analValBounce">43.15%</span>
+                            <span class="stat-badge negative" id="analBadgeBounce">1.8% ↘</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-regular fa-clock"></i> Session Duration</span>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="analValDuration">3m 42s</span>
+                            <span class="stat-badge positive" id="analBadgeDuration">14s ↗</span>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title"><i class="fa-solid fa-wallet"></i> Cost Per Lead (CPL)</span>
+                        </div>
+                        <div class="stat-card-value-row">
+                            <span class="stat-card-value" id="analValCpl">$17.20</span>
+                            <span class="stat-badge positive" id="analBadgeCpl">2.1% ↘</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- Left: Device Traffic distribution -->
+                    <div class="glass-card">
+                        <div class="chart-card-header">
+                            <span class="chart-card-title">Traffic by Device Category</span>
+                        </div>
+                        <div class="chart-wrapper-el revenue-chart-height">
+                            <canvas id="deviceChartCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right: Lead Funnel Conversion -->
+                    <div class="glass-card">
+                        <div class="chart-card-header">
+                            <span class="chart-card-title">Acquisition Pipeline Funnel</span>
+                        </div>
+                        <div class="chart-wrapper-el revenue-chart-height">
+                            <canvas id="conversionChartCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: LEADS CRM -->
+            <section id="leads" class="tab-view">
+                <!-- CRM Controls Header -->
+                <div class="crm-header-controls">
+                    <div class="search-filter-box">
+                        <div class="search-input-container">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="crmSearchInput" class="search-input" placeholder="Search leads by name, email or status...">
+                        </div>
+                    </div>
+                    <button class="btn-solid" id="addLeadBtn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add New Lead</span>
+                    </button>
+                </div>
+
+                <!-- Leads Table -->
+                <div class="glass-card">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="crmLeadsTable">
+                            <thead>
+                                <tr>
+                                    <th>Lead Name</th>
+                                    <th>Email</th>
+                                    <th>Source Channel</th>
+                                    <th>Lead Score</th>
+                                    <th>Date Added</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Populated Dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: SOCIAL REPORTS -->
+            <section id="social-reports" class="tab-view">
+                <!-- Navigation & filter row -->
+                <div class="social-tabs-row">
+                    <div class="platform-tabs">
+                        <button class="social-tab-btn active" data-platform="facebook">
+                            <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
+                        </button>
+                        <button class="social-tab-btn" data-platform="instagram">
+                            <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+                        </button>
+                        <button class="social-tab-btn" data-platform="youtube">
+                            <i class="fa-brands fa-youtube"></i> <span>YouTube</span>
+                        </button>
+                    </div>
+
+                    <div class="content-type-toggles">
+                        <button class="social-toggle-btn active" data-type="organic">Organic Posts</button>
+                        <button class="social-toggle-btn" data-type="paid">Paid Ads</button>
+                    </div>
+                </div>
+
+                <!-- AI Performance Diagnostics (Why reach high/low) -->
+                <div class="reach-comparison-grid">
+                    <!-- High Reach Card -->
+                    <div class="glass-card reach-card high-performing">
+                        <div class="reach-card-title-row">
+                            <h3 style="font-size: 1.05rem; font-weight: 700;">Top Performing Post Reach</h3>
+                            <span class="reach-card-badge">High Reach</span>
+                        </div>
+                        <div class="reach-post-preview" id="highReachPreview">
+                            <!-- Populated Dynamically -->
+                        </div>
+                        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--accent-green);">
+                            <i class="fa-solid fa-circle-check"></i> Algorithmic Driver Highlights
+                        </h4>
+                        <ul class="reach-points-list" id="highReachDrivers">
+                            <!-- Populated Dynamically -->
+                        </ul>
+                    </div>
+
+                    <!-- Low Reach Card -->
+                    <div class="glass-card reach-card underperforming">
+                        <div class="reach-card-title-row">
+                            <h3 style="font-size: 1.05rem; font-weight: 700;">Underperforming Post Reach</h3>
+                            <span class="reach-card-badge">Low Reach</span>
+                        </div>
+                        <div class="reach-post-preview" id="lowReachPreview">
+                            <!-- Populated Dynamically -->
+                        </div>
+                        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--accent-red);">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Bottleneck Diagnostics
+                        </h4>
+                        <ul class="reach-points-list" id="lowReachDrivers">
+                            <!-- Populated Dynamically -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Complete Post Catalog Grid -->
+                <div style="margin-top: 2.5rem; margin-bottom: 1.25rem;">
+                    <h2 class="table-title">Detailed Performance Catalog</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Full list of catalog entries indexed during this reporting cycle.</p>
+                </div>
+
+                <div class="posts-grid-container" id="postsCatalogGrid">
+                    <!-- Populated Dynamically -->
+                </div>
+            </section>
+
+            <!-- TAB 5: AI INSIGHTS -->
+            <section id="insights" class="tab-view">
+                <div class="insights-grid" id="aiInsightsContainer">
+                    <!-- Populated Dynamically via JS -->
+                </div>
+            </section>
+
+            <!-- TAB 6: SETTINGS -->
+            <section id="settings" class="tab-view">
+                <div class="settings-container">
+                    <!-- Profile Settings Card -->
+                    <div class="glass-card settings-card">
+                        <h3 class="settings-card-title">User Account Details</h3>
+                        <form id="profileSettingsForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="settingsName">Full Name</label>
+                                    <input type="text" id="settingsName" class="form-input" value="John Carter">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="settingsEmail">Email Address</label>
+                                    <input type="email" id="settingsEmail" class="form-input" value="john.carter@dashdark.com" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="settingsRole">System Role</label>
+                                    <input type="text" id="settingsRole" class="form-input" value="Marketing Director" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="settingsOrganization">Organization</label>
+                                    <input type="text" id="settingsOrganization" class="form-input" value="VilPower Ltd">
+                                </div>
+                                <div class="form-group-full">
+                                    <button type="submit" class="btn-solid">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- System Preferences -->
+                    <div class="glass-card settings-card">
+                        <h3 class="settings-card-title">System Preferences</h3>
+                        <div class="settings-toggles">
+                            <div class="settings-toggle-row">
+                                <div class="toggle-info">
+                                    <span class="toggle-title">Realtime Lead Alerts</span>
+                                    <span class="toggle-desc">Trigger notification when scoring exceeds 90.</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked aria-label="Toggle Realtime Lead Alerts">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-toggle-row">
+                                <div class="toggle-info">
+                                    <span class="toggle-title">Weekly Summaries</span>
+                                    <span class="toggle-desc">Receive email summaries on marketing campaigns.</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked aria-label="Toggle Weekly Summaries">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-toggle-row">
+                                <div class="toggle-info">
+                                    <span class="toggle-title">Developer Mode Analytics</span>
+                                    <span class="toggle-desc">Enable tracking performance of raw API logs.</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" aria-label="Toggle Developer Mode Analytics">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
+
+    <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
 </html>
